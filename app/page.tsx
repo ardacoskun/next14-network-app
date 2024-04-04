@@ -1,6 +1,7 @@
 import { Roboto_Mono } from "next/font/google";
 import { Button } from "@mantine/core";
 import { IconBriefcase } from "@tabler/icons-react";
+import LoginButton from "@/components/LoginButton";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -11,7 +12,7 @@ export default function Home() {
       <div className={`${roboto.className} font-bold`}>
         Professional Network
       </div>
-      <Button>Sign In</Button>
+      <LoginButton />
     </div>
   );
 }
