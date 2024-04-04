@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import SessionProvider from "@/providers/SessionProvider";
-import { getSession } from "@/lib/auth";
 import "@mantine/core/styles.css";
 import "./globals.css";
 
@@ -18,19 +16,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession();
-
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript />
       </head>
       <body className={inter.className}>
-        <SessionProvider session={session}>
-          <MantineProvider defaultColorScheme="dark">
-            {children}
-          </MantineProvider>
-        </SessionProvider>
+        <MantineProvider defaultColorScheme="dark">{children}</MantineProvider>
       </body>
     </html>
   );
