@@ -15,7 +15,10 @@ const SignInPage = async () => {
   return (
     <>
       {Object.values(providers).map((item: any) => (
-        <div key={item.name}>
+        <div
+          key={item.name}
+          className="flex w-screen h-screen justify-center items-center"
+        >
           <SignInButton provider={item} />
         </div>
       ))}
