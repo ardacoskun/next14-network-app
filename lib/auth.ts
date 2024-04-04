@@ -1,5 +1,6 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import GithubProvider from "next-auth/providers/github";
+import { getServerSession } from "next-auth";
 import { db } from "./db";
 import config from "./config";
 
@@ -13,3 +14,5 @@ export const authOptions = {
     }),
   ],
 };
+
+export const getSession = async () => await getServerSession(authOptions);
