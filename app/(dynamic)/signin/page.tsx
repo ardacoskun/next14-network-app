@@ -7,7 +7,7 @@ const SignInPage = async () => {
   const session = await getSession();
 
   if (session) {
-    redirect("/");
+    redirect("/dashboard");
   }
 
   const providers: any = await getProviders();
