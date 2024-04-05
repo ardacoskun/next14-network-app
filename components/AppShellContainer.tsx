@@ -3,13 +3,14 @@ import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { AppShell, Avatar, Burger, Menu } from "@mantine/core";
+import { AppShell, Avatar, Burger, Menu, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDoorExit,
   IconSettings,
   IconUserCircle,
 } from "@tabler/icons-react";
+import { navLinks } from "@/data";
 
 const AppShellContainer = ({ children }: { children: ReactNode }) => {
   const [opened, { toggle }] = useDisclosure();
@@ -55,7 +56,21 @@ const AppShellContainer = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
       </AppShell.Header>
-      <AppShell.Navbar>navbar</AppShell.Navbar>
+      <AppShell.Navbar>
+        {navLinks.map((item) => {
+          const IconComponent = item.leftSection;
+          return (
+            <NavLink
+              key={item.id}
+              component={Link}
+              href={item.href}
+              label={item.label}
+              leftSection={<IconComponent />}
+              active={pathname === item.href}
+            />
+          );
+        })}
+      </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
   );
