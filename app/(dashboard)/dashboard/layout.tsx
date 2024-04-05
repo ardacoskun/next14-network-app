@@ -13,7 +13,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
   return (
     <SessionProvider session={session}>
-      <AppShellContainer>{children}</AppShellContainer>
+      <AppShellContainer user={session.user}>{children}</AppShellContainer>
     </SessionProvider>
   );
 }

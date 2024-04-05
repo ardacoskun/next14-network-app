@@ -12,7 +12,12 @@ import {
 } from "@tabler/icons-react";
 import { navLinks } from "@/data";
 
-const AppShellContainer = ({ children }: { children: ReactNode }) => {
+interface AppShellContainerProps {
+  children: ReactNode;
+  user: any;
+}
+
+const AppShellContainer = ({ children, user }: AppShellContainerProps) => {
   const [opened, { toggle }] = useDisclosure();
   const pathname = usePathname();
 
@@ -38,7 +43,7 @@ const AppShellContainer = ({ children }: { children: ReactNode }) => {
             <div>
               <Menu>
                 <Menu.Target>
-                  <Avatar>
+                  <Avatar src={user.image}>
                     <IconUserCircle />
                   </Avatar>
                 </Menu.Target>
