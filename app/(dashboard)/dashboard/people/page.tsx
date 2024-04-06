@@ -40,7 +40,7 @@ const Page = async ({ searchParams }: PageProps) => {
           {item.name} - {item.jobTitle}
         </div>
       ))}
-      <PaginationContainer total={res?.numPages} />
+      <PaginationContainer total={res?.numPages} value={page} />
     </div>
   );
 };
