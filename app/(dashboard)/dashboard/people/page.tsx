@@ -32,6 +32,7 @@ interface PageProps {
 
 const Page = async ({ searchParams }: PageProps) => {
   const { page } = searchParams;
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
   const res = await getUsers(page || 1);
 
   return (
