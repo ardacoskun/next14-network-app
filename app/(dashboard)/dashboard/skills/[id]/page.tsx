@@ -3,6 +3,9 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { skills, users, usersToSkills } from "@/lib/schema";
 import SortSkillSelect from "@/components/skill/SortSkillSelect";
+import Link from "next/link";
+import { Avatar } from "@mantine/core";
+import { IconStar } from "@tabler/icons-react";
 
 const getSkill = async (id: string) => {
   return await db.query.skills.findFirst({ where: eq(skills.id, id) });
@@ -54,13 +57,23 @@ const Page = async ({ params, searchParams }: PageProps) => {
   }
 
   return (
-    <div>
-      <h1>Users with {skill?.name} skill</h1>
+    <div className="flex flex-col gap-5 max-w-md">
+      <h1 className="font-bold text-xl">Users with {skill?.name} skill</h1>
       <SortSkillSelect value={sort} />
-      <ul>
+      <ul className="flex flex-col gap-0.5">
         {users.map((item) => (
           <li key={item.user.id}>
-            {item.user.name} {item.users_to_skills?.rating}
+            <Link
+              href={`/dashboard/people/${item.user.id}`}
+              className="p-2 border-blue-400 border-b flex flex-row justify-between items-center"
+            >
+              <div className="flex flex-row gap-2 items-center">
+                <Avatar src={item.user.image} /> {item.user.name}
+              </div>
+              <div className="flex flex-row gap-2">
+                {item.users_to_skills?.rating} <IconStar color="orange" />
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
