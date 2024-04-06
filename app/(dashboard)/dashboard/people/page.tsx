@@ -1,6 +1,7 @@
+import { count } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
-import { count } from "drizzle-orm";
+import PaginationContainer from "@/components/PaginationContainer";
 
 const PER_PAGE = 20;
 
@@ -39,6 +40,7 @@ const Page = async ({ searchParams }: PageProps) => {
           {item.name} - {item.jobTitle}
         </div>
       ))}
+      <PaginationContainer total={res?.numPages} />
     </div>
   );
 };
