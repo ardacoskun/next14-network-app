@@ -11,6 +11,7 @@ import {
   IconUserCircle,
 } from "@tabler/icons-react";
 import { navLinks } from "@/data";
+import SearchInput from "./ui/SearchInput";
 
 interface AppShellContainerProps {
   children: ReactNode;
@@ -39,7 +40,9 @@ const AppShellContainer = ({ children, user }: AppShellContainerProps) => {
             Professional Network
           </div>
           <div className="flex justify-end gap-5 h-full items-center p-5">
-            <div>Search</div>
+            <div>
+              <SearchInput />
+            </div>
             <div>
               <Menu>
                 <Menu.Target>
