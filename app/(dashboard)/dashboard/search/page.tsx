@@ -1,6 +1,7 @@
 import { ilike, or } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
+import UsersTable from "@/components/user/UsersTable";
 
 interface PageProps {
   searchParams: {
@@ -27,11 +28,7 @@ const Page = async ({ searchParams }: PageProps) => {
 
   return (
     <div>
-      {users.map((item) => (
-        <div key={item.id}>
-          {item.name} - {item.firstName} - {item.lastName} - {item.jobTitle}{" "}
-        </div>
-      ))}
+      <UsersTable users={users} />
     </div>
   );
 };

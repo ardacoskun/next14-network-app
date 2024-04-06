@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { count } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import PaginationContainer from "@/components/PaginationContainer";
-import UserCard from "@/components/UserCard";
-import Link from "next/link";
+import UserCard from "@/components/user/UserCard";
 
 const PER_PAGE = 20;
 
