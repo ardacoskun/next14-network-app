@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.8.2",
+    "@faker-js/faker": "^8.4.1",
     "@mantine/core": "^7.7.1",
     "@mantine/hooks": "^7.7.1",
     "@mantine/nprogress": "^7.7.1",
