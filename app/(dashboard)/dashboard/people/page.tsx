@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import PaginationContainer from "@/components/PaginationContainer";
 import UserCard from "@/components/UserCard";
+import Link from "next/link";
 
 const PER_PAGE = 20;
 
@@ -41,7 +42,9 @@ const Page = async ({ searchParams }: PageProps) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {res?.data?.map((item) => (
           <div key={item.id}>
-            <UserCard user={item} />
+            <Link href={`/dashboard/people/${item.id}`}>
+              <UserCard user={item} />
+            </Link>
           </div>
         ))}
       </div>
