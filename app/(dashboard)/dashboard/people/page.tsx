@@ -2,6 +2,7 @@ import { count } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import PaginationContainer from "@/components/PaginationContainer";
+import UserCard from "@/components/UserCard";
 
 const PER_PAGE = 20;
 
@@ -34,12 +35,16 @@ const Page = async ({ searchParams }: PageProps) => {
   const res = await getUsers(page || 1);
 
   return (
-    <div>
-      {res?.data?.map((item) => (
-        <div key={item.id}>
-          {item.name} - {item.jobTitle}
-        </div>
-      ))}
+    <div className="flex flex-col gap-5">
+      <h1 className="font-bold text-xl">People</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {res?.data?.map((item) => (
+          <div key={item.id}>
+            <UserCard user={item} />
+          </div>
+        ))}
+      </div>
+
       <PaginationContainer total={res?.numPages} value={page} />
     </div>
   );
