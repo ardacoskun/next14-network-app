@@ -1,4 +1,4 @@
-import { ilike, or } from "drizzle-orm";
+import { ilike, or, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import UsersTable from "@/components/user/UsersTable";
@@ -22,9 +22,25 @@ const getUsers = async (query: string) => {
   return res;
 };
 
+const fuzzySearch = async (query: string) => {
+  const res = await db
+    .select()
+    .from(users)
+    .where(
+      or(
+        sql`similarity(first_name, ${query}) > 0.2`,
+        sql`similarity(last_name, ${query}) > 0.2`,
+        sql`similarity(job_title, ${query}) > 0.2`,
+        sql`similarity(name, ${query}) > 0.2`
+      )
+    );
+  return res;
+};
+
 const Page = async ({ searchParams }: PageProps) => {
   const { query } = searchParams;
-  const users = await getUsers(query);
+  //   const users = await getUsers(query);
+  const users = await fuzzySearch(query);
 
   return (
     <div>
