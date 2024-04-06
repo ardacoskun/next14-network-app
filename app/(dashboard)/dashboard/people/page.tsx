@@ -1,7 +1,14 @@
 import { db } from "@/lib/db";
 
+const PER_PAGE = 20;
+
 const getUsers = async (page: number) => {
-  const res = await db.query.users.findMany();
+  const offset = PER_PAGE * (page - 1);
+
+  const res = await db.query.users.findMany({
+    limit: PER_PAGE,
+    offset,
+  });
   return res;
 };
 
