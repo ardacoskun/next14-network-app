@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { Button, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { updateUser } from "@/lib/actions";
+import { UpdateUserState, updateUser } from "@/lib/actions";
 import { User } from "@/lib/types";
 import Editor from "../Editor";
 
 const UserForm = ({ user }: { user: User }) => {
-  const initialState = { errors: {} };
+  const initialState: UpdateUserState = { errors: {} };
   const [state, dispatch] = useFormState(updateUser, initialState);
   const [bio, setBio] = useState(user.bio);
 
@@ -30,7 +30,7 @@ const UserForm = ({ user }: { user: User }) => {
         color: "red",
       });
     }
-  });
+  }, [state]);
 
   return (
     <div>

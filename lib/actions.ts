@@ -11,7 +11,7 @@ const UpdateUserSchema = z.object({
   bio: z.string(),
 });
 
-interface UpdateUserState {
+export interface UpdateUserState {
   errors?: {
     jobTitle?: string[];
     bio?: string[];
@@ -23,7 +23,7 @@ interface UpdateUserState {
 export const updateUser = async (
   prevState: UpdateUserState,
   formData: FormData
-): Promise<UpdateUserState> => {
+) => {
   const session = await getSession();
   const jobTitle = formData.get("jobTitle");
   const bio = formData.get("bio");
