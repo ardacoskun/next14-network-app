@@ -19,6 +19,9 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
+  session: {
+    strategy: "jwt",
+  },
 };
 
 export const getSession = async () => await getServerSession(authOptions);
