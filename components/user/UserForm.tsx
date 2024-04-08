@@ -1,15 +1,20 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { Button, TextInput, Textarea } from "@mantine/core";
+import { Button, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { updateUser } from "@/lib/actions";
 import { User } from "@/lib/types";
-import { useEffect } from "react";
 import Editor from "../Editor";
 
 const UserForm = ({ user }: { user: User }) => {
   const initialState = { errors: {} };
   const [state, dispatch] = useFormState(updateUser, initialState);
+  const [bio, setBio] = useState(user.bio);
+
+  const handleUpdate = (html: string) => {
+    setBio(html);
+  };
 
   useEffect(() => {
     if (state.success) {
@@ -39,13 +44,9 @@ const UserForm = ({ user }: { user: User }) => {
           />
         </div>
         <div>
-          <Editor />
-          {/* <Textarea
-            label="Bio"
-            name="bio"
-            error={state?.errors?.bio}
-            defaultValue={user.bio!}
-          /> */}
+          <label>Bio</label>
+          <Editor content={user.bio || ""} onUpdate={handleUpdate} />
+          <input type="hidden" name="bio" value={bio || ""} />
         </div>
         <div>
           <Button type="submit">Submit</Button>
