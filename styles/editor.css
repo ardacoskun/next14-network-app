@@ -1,0 +1,12 @@
+.tiptap ul,
+.tiptap ol {
+  margin-left: 1rem;
+}
+
+.tiptap ul li {
+  list-style-type: disc;
+}
+
+.tiptap ol li {
+  list-style-type: decimal;
+}
