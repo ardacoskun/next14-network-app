@@ -1,6 +1,6 @@
 "use client";
 import { useFormState } from "react-dom";
-import { TextInput } from "@mantine/core";
+import { Button, TextInput, Textarea } from "@mantine/core";
 import { updateUser } from "@/lib/actions";
 import { User } from "@/lib/types";
 
@@ -11,7 +11,7 @@ const UserForm = ({ user }: { user: User }) => {
 
   return (
     <div>
-      <form action={dispatch}>
+      <form action={dispatch} className="flex flex-col gap-5">
         <div>
           <TextInput
             label="Job Title"
@@ -19,6 +19,20 @@ const UserForm = ({ user }: { user: User }) => {
             error={state?.errors?.jobTitle}
             defaultValue={user.jobTitle!}
           />
+        </div>
+        <div>
+          <Textarea
+            label="Bio"
+            name="bio"
+            error={state?.errors?.bio}
+            defaultValue={user.bio!}
+          />
+        </div>
+        <div>
+          <Button type="submit">Submit</Button>
+        </div>
+        <div>
+          {state.success && <p className="text-green-500">{state.success}</p>}
         </div>
       </form>
     </div>
