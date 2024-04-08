@@ -5,6 +5,7 @@ import { notifications } from "@mantine/notifications";
 import { updateUser } from "@/lib/actions";
 import { User } from "@/lib/types";
 import { useEffect } from "react";
+import Editor from "../Editor";
 
 const UserForm = ({ user }: { user: User }) => {
   const initialState = { errors: {} };
@@ -38,12 +39,13 @@ const UserForm = ({ user }: { user: User }) => {
           />
         </div>
         <div>
-          <Textarea
+          <Editor />
+          {/* <Textarea
             label="Bio"
             name="bio"
             error={state?.errors?.bio}
             defaultValue={user.bio!}
-          />
+          /> */}
         </div>
         <div>
           <Button type="submit">Submit</Button>
