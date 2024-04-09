@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { usersToSkills } from "@/lib/schema";
+import SkillRatingForm from "@/components/skill/SkillRatingForm";
 
 const getUsersToSkills = async (userId: string) => {
   return await db.query.usersToSkills.findMany({
@@ -42,7 +43,12 @@ const Page = async () => {
               <td className="border-slate-600 p-2 border-t">
                 {item.skill.name}
               </td>
-              <td className="border-slate-600 p-2 border-t">{item.rating}</td>
+              <td className="border-slate-600 p-2 border-t">
+                <SkillRatingForm
+                  rating={item.rating || 0}
+                  skillId={item.skillId}
+                />
+              </td>
               <td className="border-slate-600 p-2 border-t">Delete</td>
             </tr>
           ))}
