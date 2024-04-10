@@ -109,7 +109,7 @@ const AddUsersToSkillSchema = z.object({
   rating: z.number().min(1).max(5),
 });
 
-interface AddUsersToSkillState {
+export interface AddUsersToSkillState {
   errors?: {
     skillId?: string[];
     rating?: string[];
