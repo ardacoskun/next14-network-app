@@ -5,6 +5,7 @@ import { Notifications } from "@mantine/notifications";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/tiptap/styles.css";
+import "@mantine/charts/styles.css";
 import "@/styles/editor.css";
 import "./globals.css";
 
