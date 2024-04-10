@@ -20,3 +20,26 @@ export const navLinks = [
     leftSection: IconStar,
   },
 ];
+
+export const colorSchemeButtons = [
+  {
+    id: 1,
+    name: "light",
+    title: "Light",
+  },
+  {
+    id: 2,
+    name: "dark",
+    title: "Dark",
+  },
+  {
+    id: 3,
+    name: "auto",
+    title: "Auto",
+  },
+  {
+    id: 4,
+    name: "clear",
+    title: "Clear",
+  },
+];
