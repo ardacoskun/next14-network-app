@@ -12,9 +12,14 @@ const getUsersToSkills = async (userId: string) => {
   });
 };
 
+const getAllSkills = async () => {
+  return await db.query.skills.findMany();
+};
+
 const Page = async () => {
   const session = await getSession();
   const usersToSkills = await getUsersToSkills(session?.user.id);
+  const skills = await getAllSkills();
 
   const tableHead = [
     { id: 1, name: "Name" },
@@ -56,7 +61,7 @@ const Page = async () => {
         </tbody>
       </table>
       <div>
-        <AddUserToSkillButton />
+        <AddUserToSkillButton skills={skills} />
       </div>
     </div>
   );
