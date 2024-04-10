@@ -163,3 +163,17 @@ export const addUsersToSkill = async (
     success: "User to skill created",
   };
 };
+
+export const deleteUserToSkill = async (skillId: string) => {
+  const session = await getSession();
+
+  await db
+    .delete(usersToSkills)
+    .where(
+      and(
+        eq(usersToSkills.skillId, skillId),
+        eq(usersToSkills.userId, session?.user.id)
+      )
+    );
+  revalidatePath("/dashboard/profile/skills");
+};

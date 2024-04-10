@@ -37,9 +37,7 @@ const AddUserToSkillButton = ({ skills }: { skills: Skill[] }) => {
                 {state.errors.rating}
               </p>
             )}
-            <div>
-              <Button type="submit">Save</Button>
-            </div>
+            <Button type="submit">Save</Button>
             {state?.message && (
               <p className="text-red-600 font-semibold">{state.message}</p>
             )}

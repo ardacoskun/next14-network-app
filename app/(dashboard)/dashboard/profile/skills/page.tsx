@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { usersToSkills } from "@/lib/schema";
 import SkillRatingForm from "@/components/skill/SkillRatingForm";
 import AddUserToSkillButton from "@/components/skill/AddUserToSkillButton";
+import DeleteUserToSkillButton from "@/components/skill/DeleteUserToSkillButton";
 
 const getUsersToSkills = async (userId: string) => {
   return await db.query.usersToSkills.findMany({
@@ -55,7 +56,9 @@ const Page = async () => {
                   skillId={item.skillId}
                 />
               </td>
-              <td className="border-slate-600 p-2 border-t">Delete</td>
+              <td className="border-slate-600 p-2 border-t">
+                <DeleteUserToSkillButton skillId={item.skillId} />
+              </td>
             </tr>
           ))}
         </tbody>
