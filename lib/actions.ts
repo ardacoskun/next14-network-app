@@ -1,10 +1,11 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { and, eq } from "drizzle-orm";
 import { getSession } from "./auth";
 import { db } from "./db";
-import { users } from "./schema";
-import { eq } from "drizzle-orm";
+import { users, usersToSkills } from "./schema";
 
 const UpdateUserSchema = z.object({
   jobTitle: z.string().min(3),
@@ -50,5 +51,54 @@ export const updateUser = async (
 
   return {
     success: "Update user success",
+  };
+};
+
+const UpdateSkillRatingSchema = z.object({
+  skillId: z.string().uuid(),
+  rating: z.number().max(5),
+});
+
+interface UpdateSkillRatingState {
+  errors?: {
+    skillId?: string[];
+    rating?: string[];
+  };
+  message?: string;
+  success?: string;
+}
+
+export const updateSkillRating = async (
+  prevState: UpdateSkillRatingState,
+  formData: FormData
+): Promise<UpdateSkillRatingState> => {
+  const session = await getSession();
+
+  const validateFields = UpdateSkillRatingSchema.safeParse({
+    skillId: formData.get("skillId"),
+    rating: parseInt(formData.get("rating")?.toString()!),
+  });
+
+  if (!validateFields.success) {
+    return {
+      errors: validateFields.error.flatten().fieldErrors,
+      message: "Update skill error",
+    };
+  }
+
+  await db
+    .update(usersToSkills)
+    .set({ rating: validateFields.data.rating })
+    .where(
+      and(
+        eq(usersToSkills.skillId, validateFields.data.skillId),
+        eq(usersToSkills.userId, session?.user.id)
+      )
+    );
+
+  revalidatePath("/dashboard/profile/skills");
+
+  return {
+    success: "Update skill success",
   };
 };

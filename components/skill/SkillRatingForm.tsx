@@ -2,6 +2,7 @@
 
 import { useFormState } from "react-dom";
 import { Rating } from "@mantine/core";
+import { updateSkillRating } from "@/lib/actions";
 
 interface SkillRatingFormProps {
   rating: number;
@@ -10,11 +11,14 @@ interface SkillRatingFormProps {
 
 const SkillRatingForm = ({ rating, skillId }: SkillRatingFormProps) => {
   const initialState = {};
-  // const [state,dispatch]=useFormState()
+  const [state, dispatch] = useFormState(updateSkillRating, initialState);
 
   const handleChange = (newRating: number) => {
-    console.log("🚀 ~ handleChange ~ newRating:", newRating);
-    return {};
+    const formData = new FormData();
+    formData.set("rating", newRating.toString());
+    formData.set("skillId", skillId);
+
+    dispatch(formData);
   };
 
   return <Rating value={rating} onChange={handleChange} />;
