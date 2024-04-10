@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { usersToSkills } from "@/lib/schema";
 import SkillRatingForm from "@/components/skill/SkillRatingForm";
+import AddUserToSkillButton from "@/components/skill/AddUserToSkillButton";
 
 const getUsersToSkills = async (userId: string) => {
   return await db.query.usersToSkills.findMany({
@@ -54,6 +55,9 @@ const Page = async () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <AddUserToSkillButton />
+      </div>
     </div>
   );
 };
