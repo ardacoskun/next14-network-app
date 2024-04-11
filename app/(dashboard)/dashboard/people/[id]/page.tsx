@@ -20,9 +20,16 @@ const Page = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div>
+    <div className="flex flex-row gap-5">
       <div>
         <UserCard user={user} />
+      </div>
+      <div>
+        <h2 className="font-bold text-xl">Bio</h2>
+        <div
+          className="prose dark:prose-invert"
+          dangerouslySetInnerHTML={{ __html: user.bio ?? "" }}
+        />
       </div>
     </div>
   );
