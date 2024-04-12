@@ -23,9 +23,9 @@ export default async function main() {
         .onConflictDoNothing();
     }
   }
-  pool.end();
 }
 
 if (require.main === module) {
   main();
+  pool.end();
 }

@@ -25,4 +25,5 @@ export default async function main() {
 
 if (require.main === module) {
   main();
+  pool.end();
 }
