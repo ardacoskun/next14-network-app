@@ -25,8 +25,8 @@ export const cosineSimilarity = (
 export const combinedSimilarity = (
   user1Skills: number[],
   user2Skills: number[],
-  jobTitle1: string,
-  jobTitle2: string
+  jobTitle1?: string | null,
+  jobTitle2?: string | null
 ): number => {
   const skillsSimilarity = cosineSimilarity(user1Skills, user2Skills);
 
