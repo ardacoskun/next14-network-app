@@ -2,7 +2,10 @@ const getMagnitude = (vector: number[]) => {
   return Math.sqrt(vector.reduce((sum, value) => sum + value ** 2, 0));
 };
 
-const cosineSimilarity = (vector1: number[], vector2: number[]): number => {
+export const cosineSimilarity = (
+  vector1: number[],
+  vector2: number[]
+): number => {
   const dotProduct = vector1.reduce(
     (sum, value, index) => sum + value * vector2[index],
     0

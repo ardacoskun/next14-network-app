@@ -6,5 +6,5 @@ test("cosine similarity exact vectors", () => {
   const vector2 = [5, 5, 5, 5, 5];
 
   const score = cosineSimilarity(vector1, vector2);
-  expect(score).toBe(0.99);
+  expect(score).toBe(0.9999999999999999);
 });
