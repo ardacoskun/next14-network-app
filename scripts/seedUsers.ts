@@ -3,7 +3,7 @@ import { NewUser } from "../lib/types";
 import { users } from "../lib/schema";
 import { db, pool } from "../lib/db";
 
-async function main() {
+export default async function main() {
   for (let i = 0; i < 100; i++) {
     const username = faker.internet.userName();
     const email = `${username}@example.com`;
@@ -23,4 +23,6 @@ async function main() {
   pool.end();
 }
 
-main();
+if (require.main === module) {
+  main();
+}
