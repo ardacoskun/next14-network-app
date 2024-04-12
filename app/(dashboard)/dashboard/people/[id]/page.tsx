@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import UserCard from "@/components/user/UserCard";
 import { getKNearestNeighborsByUserId } from "@/lib/knn";
+import { Avatar, NumberFormatter } from "@mantine/core";
 
 const getUserById = async (id: string) => {
   return await db.query.users.findFirst({
@@ -32,16 +33,34 @@ const Page = async ({ params }: { params: { id: string } }) => {
         <UserCard user={user} />
       </div>
       <div>
-        <h2 className="font-bold text-xl">Bio</h2>
-        <div
-          className="prose dark:prose-invert"
-          dangerouslySetInnerHTML={{ __html: user.bio ?? "" }}
-        />
-        <div>
+        {user?.bio && (
+          <>
+            <h2 className="font-bold text-xl">Bio</h2>
+            <div
+              className="prose dark:prose-invert"
+              dangerouslySetInnerHTML={{ __html: user.bio }}
+            />
+          </>
+        )}
+
+        <h2 className="font-bold text-xl">Similar People</h2>
+        <div className="flex flex-col gap-5 mt-5">
           {similarPeople?.map((item) => (
-            <div key={item.user.id}>
-              {item.user.firstName} {item.user.lastName} {item.user.jobTitle}{" "}
-              {item.similarity}
+            <div
+              key={item.user.id}
+              className="flex flex-row items-center gap-5"
+            >
+              <Avatar src={item.user.image} size="md" />
+              <div>
+                {item.user.firstName} {item.user.lastName} {item.user.jobTitle}{" "}
+              </div>
+              <div className="flex-grow text-right">
+                <NumberFormatter
+                  value={item.similarity * 100}
+                  suffix="%"
+                  decimalScale={2}
+                />
+              </div>
             </div>
           ))}
         </div>
